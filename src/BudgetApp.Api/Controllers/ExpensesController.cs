@@ -1,14 +1,15 @@
 ﻿using BudgetApp.Application.DTO;
 using BudgetApp.Application.Queries.GetExpense;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace BudgetApp.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,9 +20,16 @@ namespace BudgetApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ExpenseDto> Get(Guid expenseId)
+        public async Task<ActionResult<ExpenseDto>> Get(string expenseId)
         {
-            return await _mediator.Send(new GetExpense { ExpenseId = expenseId} );
+            var result = await _mediator.Send(new GetExpense { ExpenseId = expenseId} );
+
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return result;
         }
     }
 }

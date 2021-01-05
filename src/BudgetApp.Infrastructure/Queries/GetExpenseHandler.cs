@@ -23,14 +23,19 @@ namespace BudgetApp.Application.Queries.GetExpense
 
         public async Task<ExpenseDto> Handle(GetExpense request, CancellationToken cancellationToken)
         {
-            var document = await _expenses.Find(q => q.Id == request.ExpenseId.ToString())
+            var document = await _expenses.Find(q => q.Id == request.ExpenseId)
                 .SingleOrDefaultAsync();
+
+            if (document is null)
+            {
+                return null;
+            }
 
             return new ExpenseDto
             {
-                Name = document.Name,
-                Category = document.Category,
-                Value = document.Value
+                Name = document?.Name,
+                Category = document?.Category,
+                Value = document?.Value
             };
         }
     }
