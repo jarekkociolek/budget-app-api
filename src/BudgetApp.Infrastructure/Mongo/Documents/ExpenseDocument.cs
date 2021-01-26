@@ -1,15 +1,10 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace BudgetApp.Infrastructure.Mongo.Documents
+﻿namespace BudgetApp.Infrastructure.Mongo.Documents
 {
-    internal sealed class ExpenseDocument
+    internal sealed class ExpenseDocument : BaseDocument
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public decimal Value { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
 }

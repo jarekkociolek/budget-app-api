@@ -6,10 +6,10 @@ namespace BudgetApp.Core.Entities
     {
         public Guid Id { get; }
         public decimal Value { get; }
-        public string Category { get; }
+        public Category Category { get; }
         public string Name { get; }
 
-        public Expense(string name, decimal value, string category)
+        public Expense(string name, decimal value, Category category)
         {
             Name = name;
             Value = value;
