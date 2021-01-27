@@ -5,6 +5,6 @@ namespace BudgetApp.Core.Entities
     public class User
     {
         public string Id { get; set; }
-        public ICollection<Category> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "_id": "ObjectId(\"601196a06724b5e3ea1384cd\")",
+  "userId": "ObjectId(\"601190d26724b5e3ea138372\")",
+  "value": 150,
+  "name": "Groceries",
+  "category": {
+    "_id": "ObjectId(\"601190d26724b5e3ea238372\")",
+    "name": "Food"
+  }
+}

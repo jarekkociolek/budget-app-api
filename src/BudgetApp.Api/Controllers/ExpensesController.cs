@@ -5,7 +5,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BudgetApp.Api.Controllers
@@ -36,7 +35,8 @@ namespace BudgetApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<ExpenseDto>>> Get(string userId)
+        [Route("all")]
+        public async Task<ActionResult<IEnumerable<ExpenseDto>>> Get(string userId)
         {
             var result = await _mediator.Send(new GetExpenses { UserId = userId });
 

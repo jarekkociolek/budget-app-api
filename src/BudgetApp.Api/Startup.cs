@@ -1,3 +1,4 @@
+using BudgetApp.Core.Entities;
 using BudgetApp.Infrastructure;
 using BudgetApp.Infrastructure.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace BudgetApp
 {
@@ -92,6 +99,26 @@ namespace BudgetApp
             {
                 endpoints.MapControllers();
             });
+
+            SeedMongo();
+        }
+
+        private static void SeedMongo()
+        {
+            var directory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var usersData = File.ReadAllText($"{directory}\\inituser.json");
+            var expenseData = File.ReadAllText($"{directory}\\initexpense.json");
+
+            var userDocument = BsonSerializer.Deserialize<BsonDocument>(usersData);
+            var expenseDocument = BsonSerializer.Deserialize<BsonDocument>(expenseData);
+
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("budgetappdb");
+
+            var users = database.GetCollection<BsonDocument>("users");
+            var expenses = database.GetCollection<BsonDocument>("expenses");
+            expenses.InsertOne(expenseDocument);
+            users.InsertOne(userDocument);
         }
     }
 }
