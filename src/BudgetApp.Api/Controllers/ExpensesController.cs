@@ -1,4 +1,5 @@
-﻿using BudgetApp.Application.DTO;
+﻿using BudgetApp.Application.Commands;
+using BudgetApp.Application.DTO;
 using BudgetApp.Application.Queries;
 using BudgetApp.Application.Queries.GetExpense;
 using MediatR;
@@ -46,6 +47,13 @@ namespace BudgetApp.Api.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ExpenseDto>> Post(ExpenseDto dto)
+        {
+            await _mediator.Send(new CreateExpense { ExpenseDto = dto });
+            return Ok();
         }
     }
 }
