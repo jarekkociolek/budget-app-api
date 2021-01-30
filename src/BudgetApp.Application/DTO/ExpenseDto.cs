@@ -1,9 +1,12 @@
-﻿namespace BudgetApp.Application.DTO
+﻿using System;
+
+namespace BudgetApp.Application.DTO
 {
     public class ExpenseDto
     {
-        public decimal? Value { get; set; }
+        public decimal Value { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
+        public Guid UserId { get; set; }
     }
 }

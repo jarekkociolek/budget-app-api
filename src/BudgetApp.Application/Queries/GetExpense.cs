@@ -1,10 +1,11 @@
 ﻿using BudgetApp.Application.DTO;
 using MediatR;
+using System;
 
 namespace BudgetApp.Application.Queries.GetExpense
 {
     public class GetExpense : IRequest<ExpenseDto>
     {
-        public string ExpenseId { get; set; }
+        public Guid ExpenseId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using BudgetApp.Application.Queries.GetExpense;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace BudgetApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ExpenseDto>> Get(string userId, string expenseId)
+        public async Task<ActionResult<ExpenseDto>> Get(string userId, Guid expenseId)
         {
             var result = await _mediator.Send(new GetExpense { ExpenseId = expenseId} );
 
@@ -37,7 +38,7 @@ namespace BudgetApp.Api.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<ActionResult<IEnumerable<ExpenseDto>>> Get(string userId)
+        public async Task<ActionResult<IEnumerable<ExpenseDto>>> Get(Guid userId)
         {
             var result = await _mediator.Send(new GetExpenses { UserId = userId });
 

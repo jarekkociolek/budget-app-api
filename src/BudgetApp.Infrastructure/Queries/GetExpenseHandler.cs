@@ -35,7 +35,7 @@ namespace BudgetApp.Application.Queries.GetExpense
             {
                 Name = document?.Name,
                 Category = document?.Category,
-                Value = document?.Value
+                Value = (decimal)(document?.Value)
             };
         }
     }
