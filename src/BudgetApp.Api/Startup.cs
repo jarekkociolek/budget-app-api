@@ -1,4 +1,3 @@
-using BudgetApp.Core.Entities;
 using BudgetApp.Infrastructure;
 using BudgetApp.Infrastructure.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -14,7 +13,6 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -74,12 +72,16 @@ namespace BudgetApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var mongoSettings = new MongoDbSettings();
+            Configuration.GetSection(MongoSectionName).Bind(mongoSettings);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BudgetApp v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BudgetApp v1"));
 
             app.UseExceptionHandler(a => a.Run(async context =>
             {
@@ -100,20 +102,20 @@ namespace BudgetApp
                 endpoints.MapControllers();
             });
 
-            SeedMongo();
+            SeedMongo(mongoSettings);
         }
 
-        private static void SeedMongo()
+        private static void SeedMongo(MongoDbSettings settings)
         {
             var directory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var usersData = File.ReadAllText($"{directory}\\inituser.json");
-            var expenseData = File.ReadAllText($"{directory}\\initexpense.json");
+            var usersData = File.ReadAllText($"{directory}/inituser.json");
+            var expenseData = File.ReadAllText($"{directory}/initexpense.json");
 
             var userDocument = BsonSerializer.Deserialize<BsonDocument>(usersData);
             var expenseDocument = BsonSerializer.Deserialize<BsonDocument>(expenseData);
 
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("budgetappdb");
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase("budget-app-db");
 
             var users = database.GetCollection<BsonDocument>("users");
             var expenses = database.GetCollection<BsonDocument>("expenses");
