@@ -1,18 +1,38 @@
-{
-  "_id": "ObjectId(\"601190d26724b5e3ea138372\")",
-  "name": "Test User",
-  "categories": [
-    {
-      "_id": "ObjectId(\"601190d26724b5e3ea238372\")",
-      "name": "Food"
-    },
-    {
-      "_id": "ObjectId(\"601190d26724b5e3ea338372\")",
-      "name": "Apartment"
-    },
-    {
-      "_id": "ObjectId(\"601190d26724b5e3ea538372\")",
-      "name": "Debts"
-    }
-  ]
-}
+[
+  {
+    "_id": "ObjectId(\"601190d26724b5e3ea138372\")",
+    "name": "Test User",
+    "categories": [
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea238372\")",
+        "name": "Food"
+      },
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea338372\")",
+        "name": "Apartment"
+      },
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea538372\")",
+        "name": "Debts"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId(\"601190d26724b5e3ea138371\")",
+    "name": "Test User",
+    "categories": [
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea238371\")",
+        "name": "Food"
+      },
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea338371\")",
+        "name": "Apartment"
+      },
+      {
+        "_id": "ObjectId(\"601190d26724b5e3ea538371\")",
+        "name": "Debts"
+      }
+    ]
+  }
+]
