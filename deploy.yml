@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-app-api-deployment
+  labels:
+    app: budget-app-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: budget-app-api
+  template:
+    metadata:
+      labels:
+        app: budget-app-api
+    spec:
+      containers:
+        - name: budget-app-api
+          image: budget-app-api:local
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget-app-api-service
+spec:
+  selector:
+    app: budget-app-api
+  ports:
+    - port: 80
+  type: NodePort
