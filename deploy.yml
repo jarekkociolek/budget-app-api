@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: budget-app-api
-          image: budget-app-api:local
+          image: jarczoslaw/budget-app-api:dev
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
 
@@ -30,4 +30,4 @@ spec:
     app: budget-app-api
   ports:
     - port: 80
-  type: NodePort
+  type: LoadBalancer
