@@ -56,5 +56,12 @@ namespace BudgetApp.Api.Controllers
             await _mediator.Send(new CreateExpense { ExpenseDto = dto });
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<ExpenseDto>> Delete(Guid id)
+        {
+            await _mediator.Send(new RemoveExpense { Id = id });
+            return Ok();
+        }
     }
 }
