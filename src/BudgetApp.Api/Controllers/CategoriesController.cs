@@ -1,4 +1,5 @@
-﻿using BudgetApp.Application.DTO;
+﻿using BudgetApp.Application.Commands;
+using BudgetApp.Application.DTO;
 using BudgetApp.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +33,13 @@ namespace BudgetApp.Api.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<ExpenseDto>> Delete(Guid id)
+        {
+            await _mediator.Send(new RemoveCategory { Id = id });
+            return Ok();
         }
     }
 }
