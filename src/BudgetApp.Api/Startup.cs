@@ -37,7 +37,7 @@ namespace BudgetApp
             services.AddAuthentication(Bearer)
                 .AddJwtBearer(Bearer, options =>
                 {
-                    options.Authority = authSettings.Authority;
+                    options.Authority = authSettings?.Authority;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false
@@ -98,6 +98,7 @@ namespace BudgetApp
                 endpoints.MapControllers();
             });
 
+            app.MigrateDevSqlDb(env);
             if (mongoSettings.SeedDatabase)
             {
                 MongoDbInitializer.Seed(mongoSettings);
