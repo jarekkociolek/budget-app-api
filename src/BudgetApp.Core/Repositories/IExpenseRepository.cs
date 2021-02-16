@@ -1,11 +1,13 @@
 ﻿using BudgetApp.Core.Entities;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace BudgetApp.Core.Repositories
 {
     public interface IExpenseRepository
     {
-        Task<Expense> GetAsync(Guid id);
+        Expense GetAsync(Guid id);
+
+        IEnumerable<Expense> GetAsync(Guid userId, Guid id);
     }
 }

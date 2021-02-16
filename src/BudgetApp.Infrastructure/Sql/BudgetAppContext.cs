@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BudgetApp.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BudgetApp.Infrastructure.Sql
@@ -9,5 +10,11 @@ namespace BudgetApp.Infrastructure.Sql
             : base(options)
         {
         }
+
+        public DbSet<Expense> Expenses { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
