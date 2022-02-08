@@ -18,9 +18,19 @@ spec:
         - name: budget-app-api
           image: jarczoslaw/budget-app-api:dev
           imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
       restartPolicy: Always
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -31,3 +41,20 @@ spec:
   ports:
     - port: 80
   type: LoadBalancer
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: budget-app-api-ingress
+  labels:
+    app: budget-app-api-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: budget-app-api-service
+          servicePort: 80
