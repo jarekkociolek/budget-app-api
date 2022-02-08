@@ -34,32 +34,32 @@ namespace BudgetApp
             Configuration.GetSection(AuthorizationSectionName).Bind(authSettings);
 
             services.AddControllers();
-            services.AddAuthentication(Bearer)
-                .AddJwtBearer(Bearer, options =>
-                {
-                    options.Authority = authSettings?.Authority;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false
-                    };
-                });
+            // services.AddAuthentication(Bearer)
+            //     .AddJwtBearer(Bearer, options =>
+            //     {
+            //         options.Authority = authSettings?.Authority;
+            //         options.TokenValidationParameters = new TokenValidationParameters
+            //         {
+            //             ValidateAudience = false
+            //         };
+            //     });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BudgetApp", Version = "v1" });
 
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
-                    {
-                        ClientCredentials = new OpenApiOAuthFlow
-                        {
-                            AuthorizationUrl = new Uri(authSettings.AuthorizationUrl),
-                            TokenUrl = new Uri(authSettings.TokenEndpointUrl),
-                            Scopes = authSettings.Scopes
-                        }
-                    }
-                });
+                // c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                // {
+                //     Type = SecuritySchemeType.OAuth2,
+                //     Flows = new OpenApiOAuthFlows
+                //     {
+                //         ClientCredentials = new OpenApiOAuthFlow
+                //         {
+                //             AuthorizationUrl = new Uri(authSettings.AuthorizationUrl),
+                //             TokenUrl = new Uri(authSettings.TokenEndpointUrl),
+                //             Scopes = authSettings.Scopes
+                //         }
+                //     }
+                // });
             });
             services.Configure<MongoDbSettings>(Configuration.GetSection(MongoSectionName));
             services.AddInfrastructure(Configuration);
@@ -98,11 +98,11 @@ namespace BudgetApp
                 endpoints.MapControllers();
             });
 
-            app.MigrateDevSqlDb(env);
-            if (mongoSettings.SeedDatabase)
-            {
-                MongoDbInitializer.Seed(mongoSettings);
-            }
+            // app.MigrateDevSqlDb(env);
+            // if (mongoSettings.SeedDatabase)
+            // {
+            //     MongoDbInitializer.Seed(mongoSettings);
+            // }
         }
     }
 }

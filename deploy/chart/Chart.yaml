@@ -1,0 +1,4 @@
+name: budget-app-api
+version: 1.0.0
+apiVersion: v2
+appVersion: "dev"

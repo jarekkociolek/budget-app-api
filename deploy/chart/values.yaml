@@ -1,0 +1,18 @@
+environment: development
+
+apphost: k8s
+
+label:
+  name: budget-app-api
+
+container:
+  name: budget-app-api
+  pullPolicy: IfNotPresent
+  image: jarczoslaw/budget-app-api
+  tag: dev
+  port: 80
+replicas: 3
+
+service:
+  port: 80
+  type: LoadBalancer
