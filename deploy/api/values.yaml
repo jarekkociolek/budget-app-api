@@ -1,7 +1,5 @@
 environment: development
 
-apphost: k8s
-
 label:
   name: budget-app-api
 
