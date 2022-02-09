@@ -13,4 +13,4 @@ replicas: 3
 
 service:
   port: 80
-  type: LoadBalancer
+  type: NodePort

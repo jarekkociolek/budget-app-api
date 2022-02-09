@@ -40,7 +40,7 @@ spec:
     app: budget-app-api
   ports:
     - port: 80
-  type: LoadBalancer
+  type: NodePort
 
 ---
 

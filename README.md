@@ -7,3 +7,5 @@ To run container: docker run -p 80:80 budget-app-api:latest
 # KUBERNETES
 To create pods in cluster(root folder): kubectl apply -f deploy-api.yml
 To revert deployment: kubectl delete -f deploy-api.yml
+
+Ingress installation: https://kubernetes.github.io/ingress-nginx/deploy
