@@ -36,11 +36,13 @@ kind: Service
 metadata:
   name: budget-app-api-service
 spec:
+  type: ClusterIP
   selector:
     app: budget-app-api
   ports:
     - port: 80
-  type: NodePort
+      targetPort: 80
+      protocol: TCP
 
 ---
 
@@ -50,6 +52,8 @@ metadata:
   name: budget-app-api-ingress
   labels:
     app: budget-app-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
