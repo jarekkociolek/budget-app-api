@@ -18,3 +18,6 @@ Uninstall helm chart: helm uninstall budget-app-api
 # INGRESS
 I was missing...
     ingressClassName: nginx
+
+# MONGO
+    Chart to install mongodb: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
