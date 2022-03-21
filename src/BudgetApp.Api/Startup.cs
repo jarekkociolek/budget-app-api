@@ -19,6 +19,7 @@ namespace BudgetApp
         private const string Bearer = "Bearer";
         private const string MongoSectionName = "Mongo";
         private const string AuthorizationSectionName = "Authorization";
+        private const string GeneralSectionName = "GeneralSettings";
 
         public Startup(IConfiguration configuration)
         {
@@ -32,6 +33,8 @@ namespace BudgetApp
         {
             var authSettings = new AuthorizationSettings();
             Configuration.GetSection(AuthorizationSectionName).Bind(authSettings);
+
+            services.Configure<GeneralSettings>(Configuration.GetSection(GeneralSectionName));
 
             services.AddControllers();
             // services.AddAuthentication(Bearer)
