@@ -53,6 +53,9 @@ spec:
           imagePullPolicy: {{ .Values.container.pullPolicy }}
           ports:
             - containerPort: {{ .Values.container.port }}
+          # volumeMounts:
+          #   - name: config-volume
+          #     mountPath: ./
           resources:
             requests:
               cpu: 100m
@@ -60,4 +63,16 @@ spec:
             limits:
               cpu: 200m
               memory: 200Mi
+          env:
+            - name: APPLICATION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-map
+                  key: application-name
+          # - name: APPLICATION_NAME
+          #   value: "Production"
       restartPolicy: Always
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-config-map

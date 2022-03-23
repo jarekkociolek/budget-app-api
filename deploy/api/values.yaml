@@ -5,7 +5,7 @@ label:
 
 container:
   name: budget-app-api
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   image: jarczoslaw/budget-app-api
   tag: dev
   port: 80

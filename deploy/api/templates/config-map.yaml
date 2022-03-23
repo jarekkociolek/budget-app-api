@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config-map
 data:
-  application-name: "Production"
+  application-name: "Production-from-config-map"

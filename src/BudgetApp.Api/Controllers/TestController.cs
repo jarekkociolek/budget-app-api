@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,10 +16,18 @@ namespace BudgetApp.Api.Controllers
             _generalSettings = generalSettings;
         }
         
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("appsettings")]
+        public IActionResult GetAppSettings()
         {
             return Ok(_generalSettings.Value.ApplicationName);
         }
+
+        [HttpGet("envVars")]
+        public IActionResult GetEnvVariables()
+        {
+            var variable = Environment.GetEnvironmentVariable("APPLICATION_NAME");
+            return Ok(variable);
+        }
+
     }
 }
